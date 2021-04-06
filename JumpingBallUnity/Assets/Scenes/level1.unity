@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: abba833827e8b464a9e302a00ab5269c,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -4979,7 +4980,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 2.5504e-41, z: 0, w: 6.90625}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5206,8 +5207,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 400
   jumpForce: 45
-  obstacle: {fileID: 5618905719447365030, guid: 8c54878a2dfc3d242a93b3c19ad47fa6,
-    type: 3}
+  obstacles:
+  - {fileID: 5618905719447365030, guid: 8c54878a2dfc3d242a93b3c19ad47fa6, type: 3}
+  - {fileID: 5618905719447365030, guid: 321228a48f76e2e41b150eaf2b8026a7, type: 3}
   obstacleDistance: 46
   obstaclePosY: 12
   numberOfObstacles: 100

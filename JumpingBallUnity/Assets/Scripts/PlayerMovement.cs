@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce;
     Vector3 vec;
 
-    [SerializeField] GameObject obstacle;
+    [SerializeField] GameObject[] obstacles;
     [SerializeField] float obstacleDistance;
     [SerializeField] float obstaclePosY;
     [SerializeField] int numberOfObstacles;
 
+    int length;
 
 
     // Start is called before the first frame update
@@ -30,12 +32,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void BuildObstacles()
     {
+        length = obstacles.Length;
         vec.z = 56.4f;
         for (int i = 0; i < numberOfObstacles; i++)
         {
             vec.z += obstacleDistance;
             vec.y = UnityEngine.Random.Range(-obstaclePosY, obstaclePosY);
-            Instantiate(obstacle, vec, Quaternion.identity);
+            Instantiate(obstacles[UnityEngine.Random.Range(0,length)], vec, Quaternion.identity);
         }
     }
 
@@ -66,5 +69,15 @@ public class PlayerMovement : MonoBehaviour
 
         cameraHolder.transform.position = vec;
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Invoke("RestartGame",1f);
+    }
+
+    void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }
