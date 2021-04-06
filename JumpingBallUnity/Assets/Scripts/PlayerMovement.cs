@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,11 +11,32 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float playerSpeed;
     [SerializeField] float jumpForce;
     Vector3 vec;
+
+    [SerializeField] GameObject obstacle;
+    [SerializeField] float obstacleDistance;
+    [SerializeField] float obstaclePosY;
+    [SerializeField] int numberOfObstacles;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         cameraHolder = Camera.main.transform.parent;
+
+        BuildObstacles();
+    }
+
+    private void BuildObstacles()
+    {
+        vec.z = 56.4f;
+        for (int i = 0; i < numberOfObstacles; i++)
+        {
+            vec.z += obstacleDistance;
+            vec.y = UnityEngine.Random.Range(-obstaclePosY, obstaclePosY);
+            Instantiate(obstacle, vec, Quaternion.identity);
+        }
     }
 
     // Update is called once per frame
