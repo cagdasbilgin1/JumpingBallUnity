@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
 
     int length;
 
+    bool isGameOver = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +51,15 @@ public class PlayerMovement : MonoBehaviour
         {
             jump = true;
         }
+
+        if (!isGameOver)
+        {
+            if(transform.position.y < -32 || transform.position.y > 34)
+            {
+                isGameOver = true;
+                Invoke("RestartGame", .3f);
+            }
+        }
     }
 
     void FixedUpdate()
@@ -73,6 +84,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        rb.velocity = Vector3.zero;
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        GetComponent<MeshRenderer>().enabled = false;
+        transform.GetChild(1).GetComponent<ParticleSystem>().Play();
         Invoke("RestartGame",1f);
     }
 
